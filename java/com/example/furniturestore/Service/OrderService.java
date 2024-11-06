@@ -19,13 +19,12 @@ public class OrderService {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-    //xác nhận thành toan
     @Transactional
     public Order createOrder(Order order, List<OrderItem> orderItems) {
         // Lưu thông tin đơn hàng
         Order savedOrder = orderRepository.save(order);
 
-        // lưu các sản phẩm vào đơn hàng
+        // Lưu các sản phẩm vào đơn hàng
         for (OrderItem item : orderItems) {
             item.setOrder(savedOrder);
             orderItemRepository.save(item);
@@ -33,6 +32,7 @@ public class OrderService {
 
         return savedOrder;
     }
+
 
     // Lấy danh sách tất cả hóa đơn
     public List<Order> getAllOrders() {
